@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Espanto — Historias Marginales</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --negro:#050409;
+  --hueso:#e8ddd0;
+  --gris:#9d90a8;
+  --rojo:#8f1d1d;
+  --verde:#234224;
+  --fluor:#8ab830;
+  --dorado:#c8a848;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--negro);
+  color:var(--hueso);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  opacity:.25;
+  pointer-events:none;
+  mix-blend-mode:overlay;
+
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+/* HEADER */
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:999;
+
+  padding:1.5rem 2rem;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:linear-gradient(to bottom, rgba(0,0,0,.9), transparent);
+}
+
+.logo{
+  font-family:'IM Fell English',serif;
+  font-size:1.2rem;
+  letter-spacing:.08em;
+}
+
+nav{
+  display:flex;
+  gap:1.5rem;
+}
+
+nav a{
+  color:var(--gris);
+  text-decoration:none;
+  text-transform:uppercase;
+
+  font-family:'Space Mono',monospace;
+  font-size:.6rem;
+  letter-spacing:.2em;
+
+  transition:.3s;
+}
+
+nav a:hover{
+  color:white;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+  position:relative;
+  overflow:hidden;
+
+  text-align:center;
+
+  padding:2rem;
+
+  background:
+  radial-gradient(circle at center, rgba(143,29,29,.2), transparent 50%),
+  radial-gradient(circle at 20% 20%, rgba(200,168,72,.05), transparent 30%),
+  #050409;
+}
+
+.smoke{
+  position:absolute;
+  width:200%;
+  height:200%;
+
+  background:radial-gradient(circle, rgba(255,255,255,.03), transparent 60%);
+
+  animation:drift 30s linear infinite;
+}
+
+@keyframes drift{
+  0%{ transform:translate(0,0) rotate(0deg); }
+  50%{ transform:translate(-5%,5%) rotate(8deg); }
+  100%{ transform:translate(0,0) rotate(0deg); }
+}
+
+.pre-title{
+  position:relative;
+  z-index:2;
+
+  font-family:'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.4em;
+
+  color:#a02020;
+
+  font-size:.65rem;
+
+  margin-bottom:2rem;
+}
+
+.main-title{
+  position:relative;
+  z-index:2;
+
+  font-family:'IM Fell English',serif;
+  font-size:clamp(5rem,18vw,14rem);
+
+  line-height:.82;
+
+  margin-bottom:2rem;
+
+  text-shadow:0 0 40px rgba(143,29,29,.3);
+}
+
+.main-title em{
+  font-style:italic;
+}
+
+.tagline{
+  position:relative;
+  z-index:2;
+
+  font-family:'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.45em;
+
+  color:#7e7287;
+
+  font-size:.72rem;
+
+  margin-bottom:3rem;
+}
+
+.rotating{
+  position:relative;
+  z-index:2;
+
+  font-family:'IM Fell English',serif;
+  font-style:italic;
+
+  color:var(--dorado);
+
+  font-size:1.25rem;
+
+  transition:.6s;
+}
+
+.audio-btn{
+  margin-top:2rem;
+
+  position:relative;
+  z-index:2;
+
+  background:none;
+  border:1px solid rgba(255,255,255,.15);
+
+  color:#aaa;
+
+  padding:.9rem 1.2rem;
+
+  cursor:pointer;
+
+  text-transform:uppercase;
+  letter-spacing:.2em;
+
+  font-family:'Space Mono',monospace;
+  font-size:.65rem;
+
+  transition:.3s;
+}
+
+.audio-btn:hover{
+  border-color:var(--dorado);
+  color:white;
+}
+
+/* INTRO */
+
+.intro{
+  max-width:900px;
+  margin:auto;
+
+  padding:8rem 2rem;
+
+  text-align:center;
+}
+
+.intro p{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(1.4rem,2.8vw,2rem);
+  line-height:1.9;
+
+  color:#c8bfb0;
+}
+
+/* PORTALS */
+
+.portal-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.portal{
+  min-height:75vh;
+
+  position:relative;
+
+  overflow:hidden;
+
+  display:flex;
+  align-items:flex-end;
+
+  padding:3rem;
+
+  text-decoration:none;
+
+  border:1px solid rgba(255,255,255,.04);
+
+  transition:.5s;
+}
+
+.portal:hover{
+  transform:scale(1.01);
+}
+
+.portal::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(to top, rgba(0,0,0,.9), transparent);
+}
+
+.portal-content{
+  position:relative;
+  z-index:2;
+}
+
+.portal-tag{
+  font-family:'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.3em;
+  font-size:.55rem;
+
+  margin-bottom:1rem;
+}
+
+.portal h2{
+  font-family:'IM Fell English',serif;
+  font-size:3.3rem;
+
+  margin-bottom:1rem;
+
+  color:white;
+}
+
+.portal p{
+  font-family:'IM Fell English',serif;
+  font-style:italic;
+
+  line-height:1.8;
+
+  max-width:420px;
+
+  color:#b8b0c0;
+}
+
+/* PERIFERIA */
+
+.periferia{
+  background:
+  repeating-linear-gradient(0deg,
+  transparent,
+  transparent 4px,
+  rgba(138,184,48,.02) 4px,
+  rgba(138,184,48,.02) 6px),
+
+  radial-gradient(circle at top left, rgba(138,184,48,.1), transparent 40%),
+  #07080d;
+}
+
+.periferia .portal-tag{
+  color:var(--fluor);
+}
+
+/* MONTE */
+
+.monte{
+  background:
+  radial-gradient(circle at center, rgba(35,66,36,.3), transparent 50%),
+  linear-gradient(to bottom, #071008, #050705);
+}
+
+.monte::after{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle at 30% 20%, rgba(255,255,255,.03), transparent 30%),
+  radial-gradient(circle at 70% 80%, rgba(255,255,255,.03), transparent 40%);
+
+  animation:mist 10s ease-in-out infinite;
+}
+
+@keyframes mist{
+  0%{ opacity:.3; }
+  50%{ opacity:.7; }
+  100%{ opacity:.3; }
+}
+
+.monte .portal-tag{
+  color:#5a9050;
+}
+
+/* MEMORIA */
+
+.memoria{
+  background:
+  linear-gradient(to bottom, rgba(143,29,29,.05), transparent),
+  radial-gradient(circle at center, rgba(143,29,29,.2), transparent 40%),
+  #0d0707;
+}
+
+.memoria::after{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:100% 4px;
+
+  opacity:.3;
+}
+
+.memoria .portal-tag{
+  color:#b32727;
+}
+
+/* UMBRAL */
+
+.umbral{
+  background:
+  radial-gradient(circle at center, rgba(200,168,72,.14), transparent 40%),
+  radial-gradient(circle at 70% 20%, rgba(255,255,255,.03), transparent 20%),
+  #09070d;
+}
+
+.umbral .portal-tag{
+  color:var(--dorado);
+}
+
+.umbral::after{
+  content:'✶';
+
+  position:absolute;
+  top:15%;
+  right:10%;
+
+  color:rgba(200,168,72,.15);
+
+  font-size:8rem;
+
+  animation:pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%{ opacity:.1; }
+  50%{ opacity:.35; }
+  100%{ opacity:.1; }
+}
+
+/* INNER PAGES */
+
+.section-page{
+  min-height:100vh;
+
+  padding:9rem 2rem;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.inner{
+  max-width:900px;
+}
+
+.section-page h3{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(3rem,8vw,6rem);
+
+  margin-bottom:2rem;
+}
+
+.section-page p{
+  font-family:'IM Fell English',serif;
+  font-size:1.3rem;
+
+  line-height:2;
+
+  color:#d1c8bc;
+}
+
+#periferia{
+  background:#06070b;
+}
+
+#monte{
+  background:#061007;
+}
+
+#memoria{
+  background:#0d0707;
+}
+
+#umbral{
+  background:#09070d;
+}
+
+/* FOOTER */
+
+footer{
+  padding:4rem 2rem;
+  text-align:center;
+
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.footer-title{
+  font-family:'IM Fell English',serif;
+  font-size:2rem;
+
+  margin-bottom:1rem;
+}
+
+.footer-sub{
+  font-family:'Space Mono',monospace;
+
+  text-transform:uppercase;
+  letter-spacing:.3em;
+
+  color:#777;
+
+  font-size:.6rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  nav{
+    display:none;
+  }
+
+  .portal-grid{
+    grid-template-columns:1fr;
+  }
+
+  .portal h2{
+    font-size:2.4rem;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<audio id="ambient" loop>
+  <source src="ambient.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+
+<div class="logo">El Espanto</div>
+
+<nav>
+  <a href="#periferia">Periferia</a>
+  <a href="#monte">Monte</a>
+  <a href="#memoria">Memoria</a>
+  <a href="#umbral">Umbral</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="smoke"></div>
+
+<p class="pre-title">
+Centroamérica · Periodismo desde los márgenes
+</p>
+
+<h1 class="main-title">
+<em>El</em><br>
+Espanto
+</h1>
+
+<p class="tagline">
+Historias marginales
+</p>
+
+<p class="rotating" id="phrase">
+Los territorios también hablan.
+</p>
+
+<button class="audio-btn" onclick="toggleAudio()">
+Activar sonido
+</button>
+
+</section>
+
+<section class="intro">
+
+<p>
+No diseñamos un sitio para explicar el mundo.
+Construimos un espacio para sentir que el mundo todavía tiene misterio.
+</p>
+
+</section>
+
+<section class="portal-grid">
+
+<a href="#periferia" class="portal periferia">
+<div class="portal-content">
+<div class="portal-tag">Territorio urbano</div>
+<h2>La Periferia</h2>
+<p>
+Mercados, deterioro, lluvia, buses, neón viejo y ruido eléctrico.
+</p>
+</div>
+</a>
+
+<a href="#monte" class="portal monte">
+<div class="portal-content">
+<div class="portal-tag">Territorio biocultural</div>
+<h2>El Monte</h2>
+<p>
+Cerros, espiritualidad, oralidad, ritual y supervivencia.
+</p>
+</div>
+</a>
+
+<a href="#memoria" class="portal memoria">
+<div class="portal-content">
+<div class="portal-tag">Historia y herida</div>
+<h2>La Memoria Sangrante</h2>
+<p>
+La herida histórica todavía respira dentro del territorio.
+</p>
+</div>
+</a>
+
+<a href="#umbral" class="portal umbral">
+<div class="portal-content">
+<div class="portal-tag">Lo numinoso</div>
+<h2>El Umbral</h2>
+<p>
+Mito, sueño, aparición y religión popular.
+</p>
+</div>
+</a>
+
+</section>
+
+<section id="periferia" class="section-page">
+<div class="inner">
+<h3>La Periferia</h3>
+<p>
+La ciudad como organismo. Un sistema nervioso hecho de concreto húmedo, buses nocturnos, mercados y cables eléctricos.
+</p>
+</div>
+</section>
+
+<section id="monte" class="section-page">
+<div class="inner">
+<h3>El Monte</h3>
+<p>
+El monte no es paisaje. Es refugio, memoria, peligro y presencia espiritual.
+</p>
+</div>
+</section>
+
+<section id="memoria" class="section-page">
+<div class="inner">
+<h3>La Memoria Sangrante</h3>
+<p>
+La guerra, la masacre, el desplazamiento y las cicatrices todavía habitan el presente.
+</p>
+</div>
+</section>
+
+<section id="umbral" class="section-page">
+<div class="inner">
+<h3>El Umbral</h3>
+<p>
+Hay lugares donde algo se hace presente. En Nahuizalco le llaman paraje.
+</p>
+</div>
+</section>
+
+<footer>
+<div class="footer-title">El Espanto</div>
+<div class="footer-sub">
+Historias marginales · Centroamérica
+</div>
+</footer>
+
+<script>
+
+const phrases = [
+
+"Los territorios también hablan.",
+"La ciudad no duerme.",
+"Debajo del ruido todavía existe algo.",
+"El pasado todavía respira.",
+"Lo sagrado habita en lo cotidiano.",
+"El monte es misterio, peligro y refugio."
+
+];
+
+let i = 0;
+
+const phrase = document.getElementById('phrase');
+
+setInterval(()=>{
+
+phrase.style.opacity = 0;
+
+setTimeout(()=>{
+
+  i = (i + 1) % phrases.length;
+
+  phrase.textContent = phrases[i];
+
+  phrase.style.opacity = 1;
+
+},600);
+
+},4500);
+
+const audio = document.getElementById('ambient');
+
+let playing = false;
+
+function toggleAudio(){
+
+if(!playing){
+
+  audio.volume = 0.4;
+  audio.play();
+
+  playing = true;
+
+}else{
+
+  audio.pause();
+
+  playing = false;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
+```
+
+## Estructura recomendada de archivos
+
+```text
+/el-espanto/
+ ├── index.html
+ └── ambient.mp3
+```
+
+El archivo de audio debe llamarse exactamente:
+
+```text
+ambient.mp3
+```
+
+Luego solo abres:
+
+```text
+index.html
